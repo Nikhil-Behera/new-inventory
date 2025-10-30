@@ -1,0 +1,28 @@
+.summary-card {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-light);
+}
+
+.card-value {
+  font-size: 2.5rem;
+  margin: 0.5rem 0;
+}
+
+.card-description {
+  margin: 0;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+}
+
+.summary-card.alert .card-value {
+  color: #ffc107;
+}

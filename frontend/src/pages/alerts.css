@@ -1,0 +1,77 @@
+.alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.alert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.alert-icon {
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-content h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text);
+}
+
+.alert-content p {
+  margin: 0 0 0.5rem 0;
+  color: var(--color-text-light);
+}
+
+.alert-timestamp {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.alert-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.alert-priority {
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.alert-priority.high {
+  background-color: #fdd;
+  color: #dc3545;
+}
+
+.alert-priority.medium {
+  background-color: #fff3cd;
+  color: #ffc107;
+}
+
+.btn-mark-as-read {
+  background: none;
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-mark-as-read:hover {
+  background-color: #f9f9f9;
+}

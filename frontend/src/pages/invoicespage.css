@@ -1,0 +1,6 @@
+.table-empty-message {
+  text-align: center !important;
+  padding: 3rem !important;
+  color: var(--color-text-light);
+  font-size: 1.1rem;
+}

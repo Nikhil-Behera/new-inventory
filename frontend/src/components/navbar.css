@@ -1,0 +1,103 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navbar-icon-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--color-text-light);
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-icon-btn:hover {
+  background-color: #eee;
+}
+
+.navbar-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #dc3545;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.4rem;
+  border-radius: 50%;
+}
+
+.navbar-profile {
+  position: relative;
+}
+
+.navbar-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  width: 220px;
+  overflow: hidden;
+  z-index: 1000;
+  margin-top: 0.5rem;
+}
+
+.navbar-dropdown .dropdown-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-dropdown .dropdown-header strong {
+  display: block;
+  color: var(--color-text);
+}
+.navbar-dropdown .dropdown-header span {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+}
+
+.navbar-dropdown a {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.navbar-dropdown a:hover {
+  background-color: #f9f9f9;
+}
+
+/* Styles for the logout button to match the links in the dropdown */
+.navbar-dropdown .dropdown-logout-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  font-size: 1rem; /* Match default link font size */
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.navbar-dropdown .dropdown-logout-btn:hover {
+  background-color: #f9f9f9;
+}

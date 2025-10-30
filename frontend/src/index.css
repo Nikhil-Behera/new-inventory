@@ -1,0 +1,98 @@
+/* Basic Reset & Variables */
+:root {
+  --color-primary: #0d6efd;
+  --color-dark-blue: #232a35;
+  --color-light-bg: #f8f9fa;
+  --color-white: #ffffff;
+  --color-text: #333;
+  --color-text-light: #888;
+  --color-border: #dee2e6;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --border-radius: 8px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  margin: 0;
+  background-color: var(--color-light-bg);
+  color: var(--color-text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* App Layout */
+.app-layout {
+  display: flex;
+}
+
+.app-main {
+  flex-grow: 1;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* Table Styles */
+.app-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background: var(--color-white);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.app-table th,
+.app-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.app-table th {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+.page-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-text-light);
+}

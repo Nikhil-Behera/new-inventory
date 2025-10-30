@@ -1,0 +1,63 @@
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.top-selling-card {
+  background: var(--color-white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.top-selling-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+.top-selling-card p {
+  margin-top: 0;
+  color: var(--color-text-light);
+  margin-bottom: 1.5rem;
+}
+
+.top-selling-list {
+  list-style: none;
+  padding-left: 0;
+  counter-reset: top-seller-counter;
+}
+
+.top-selling-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.top-selling-list li:last-child {
+  border-bottom: none;
+}
+
+.top-selling-list li::before {
+  counter-increment: top-seller-counter;
+  content: counter(top-seller-counter);
+  margin-right: 1.5rem;
+  background: #e9ecef;
+  color: var(--color-text);
+  font-weight: 700;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.top-selling-list li span:last-child {
+  color: var(--color-text-light);
+  font-weight: 400;
+}
