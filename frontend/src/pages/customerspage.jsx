@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { mockCustomers } from '../data/mockcust.js'; // Check your filename, you have 'mockcust.js'
+import { FaEdit, FaTrash, FaDownload } from 'react-icons/fa';
+import { jsPDF } from 'jspdf';
 import AddCustomerModal from '../components/AddCustomerModal';
 
 function CustomersPage() {
@@ -27,6 +29,23 @@ function CustomersPage() {
     });
     setIsModalOpen(false);
     setCustomerToEdit(null);
+  };
+
+  const handleDownloadCustomer = (customer) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(22);
+    doc.text("Customer Details", 20, 20);
+
+    doc.setFontSize(16);
+    doc.text(`Customer ID: ${customer.id}`, 20, 40);
+    doc.text(`Name: ${customer.name}`, 20, 50);
+    doc.text(`Contact: ${customer.contact}`, 20, 60);
+    doc.text(`Address: ${customer.address}`, 20, 70);
+    doc.text(`GST Number: ${customer.gstNumber}`, 20, 80);
+
+    // Save the PDF
+    doc.save(`customer-${customer.id}-${customer.name}.pdf`);
   };
 
   return (
@@ -63,10 +82,13 @@ function CustomersPage() {
               <td>{customer.gstNumber}</td>
               <td className="actions-cell">
                 <button className="icon-btn" onClick={() => { setCustomerToEdit(customer); setIsModalOpen(true); }}>
-                  ✏️
+                  <FaEdit />
+                </button>
+                <button className="icon-btn" title="Download Details" onClick={() => handleDownloadCustomer(customer)}>
+                  <FaDownload />
                 </button>
                 <button className="icon-btn delete">
-                  🗑️
+                  <FaTrash />
                 </button>
               </td>
             </tr>
