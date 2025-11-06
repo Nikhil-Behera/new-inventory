@@ -21,7 +21,7 @@ function AnalyticsPage() {
       <div className="analytics-grid">
         <SummaryCard 
           title="Total Revenue" 
-          value="$0.00" 
+          value="₹0.00" 
           description="From all invoices" 
         />
         <SummaryCard 
