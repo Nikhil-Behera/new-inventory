@@ -11,6 +11,7 @@ const OrdersIcon = () => <span>[O]</span>;
 const CustomersIcon = () => <span>[C]</span>;
 const AnalyticsIcon = () => <span>[A]</span>;
 const InvoicesIcon = () => <span>[Inv]</span>;
+const SettingsIcon = () => <span>[S]</span>;
 
 function Sidebar() {
   return (
@@ -45,6 +46,11 @@ function Sidebar() {
         <li>
           <NavLink to="/invoices">
             <InvoicesIcon /> Invoices
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/settings">
+            <SettingsIcon /> Settings
           </NavLink>
         </li>
       </ul>

@@ -1,42 +1,83 @@
 .settings-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 700px;
-}
+    padding: 2.5rem;
+    background-color: var(--color-background);
+  }
+  
+  .settings-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+  
+  .settings-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
 
-.settings-card {
-  background: var(--color-white);
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-}
-
-.settings-card h3 {
-  margin-top: 0;
-  margin-bottom: 0.25rem;
-}
-
-.settings-card p {
-  margin-top: 0;
-  color: var(--color-text-light);
-  margin-bottom: 2rem;
-}
-
-.settings-card .form-group {
-  margin-bottom: 1.5rem;
-}
-
-.settings-card .form-group label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.settings-card .form-group input {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius);
-}
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(106, 90, 205, 0.2);
+  }
+  
+  .btn-primary {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+  }
+  
+  .error-message {
+    color: #d9534f;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+  }
+  
+  .success-message {
+    color: #5cb85c;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+  }
+  

@@ -1,22 +1,24 @@
 /* Basic Reset & Variables */
 :root {
-  --color-primary: #0d6efd;
-  --color-dark-blue: #232a35;
-  --color-light-bg: #f8f9fa;
-  --color-white: #ffffff;
-  --color-text: #333;
-  --color-text-light: #888;
-  --color-border: #dee2e6;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --border-radius: 8px;
+  --color-primary: #6a5acd; /* SlateBlue */
+  --color-primary-dark: #483d8b; /* DarkSlateBlue */
+  --color-secondary: #f0e68c; /* Khaki */
+  --color-background: #f5f5f5; /* WhiteSmoke */
+  --color-surface: #ffffff;
+  --color-text-primary: #333333;
+  --color-text-secondary: #777777;
+  --color-border: #dddddd;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
-  background-color: var(--color-light-bg);
-  color: var(--color-text);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -30,7 +32,7 @@ body {
 
 .app-main {
   flex-grow: 1;
-  padding: 2rem;
+  padding: 2.5rem;
   min-height: 100vh;
 }
 
@@ -38,8 +40,8 @@ body {
 .app-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1.5rem;
-  background: var(--color-white);
+  margin-top: 2rem;
+  background: var(--color-surface);
   box-shadow: var(--shadow);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -47,7 +49,7 @@ body {
 
 .app-table th,
 .app-table td {
-  padding: 1rem;
+  padding: 1.25rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid var(--color-border);
 }
@@ -55,27 +57,34 @@ body {
 .app-table th {
   background-color: #f9f9f9;
   font-weight: 600;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
 }
 
 /* Button Styles */
 .btn {
-  padding: 0.75rem 1.25rem;
+  padding: 0.8rem 1.5rem;
   font-size: 0.9rem;
   font-weight: 600;
   border: none;
   border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-surface);
 }
 
 .btn-primary:hover {
-  opacity: 0.85;
+  background-color: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 /* Page Header */
@@ -83,16 +92,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .page-header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 .page-header h2 {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 400;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary);
 }

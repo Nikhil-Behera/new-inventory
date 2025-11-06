@@ -8,6 +8,8 @@ function InventoryPage() {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortKey, setSortKey] = useState('');
 
   useEffect(() => {
     // This simulates fetching data from an API
@@ -40,6 +42,17 @@ function InventoryPage() {
     }
   };
 
+  const filteredProducts = products.filter(product =>
+    product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (!sortKey) return 0;
+    if (a[sortKey] < b[sortKey]) return -1;
+    if (a[sortKey] > b[sortKey]) return 1;
+    return 0;
+  });
+
   return (
     <div className="inventory-page">
       <div className="page-header">
@@ -52,7 +65,22 @@ function InventoryPage() {
         </button>
       </div>
 
-      {/* You would add a search bar here */}
+      <div className="filters">
+        <input
+          type="text"
+          placeholder="Search by product name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select onChange={(e) => setSortKey(e.target.value)} value={sortKey}>
+          <option value="">Sort By</option>
+          <option value="productName">Product Name</option>
+          <option value="supplier">Supplier</option>
+          <option value="quantity">Quantity</option>
+          <option value="expiryDate">Expiry Date</option>
+        </select>
+      </div>
+
       {isModalOpen && (
         <AddProductModal 
           onClose={() => setIsModalOpen(false)} 
@@ -74,12 +102,12 @@ function InventoryPage() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {sortedProducts.map((product) => (
             <tr key={product.id}>
               <td>{product.productName}</td>
               <td>{product.supplier}</td>
               <td>{product.quantity}</td>
-              <td>${product.price.toFixed(2)}</td>
+              <td>Rs{product.price.toFixed(2)}</td>
               <td>{product.expiryDate}</td>
               <td>{product.location}</td>
               <td className="actions-cell">

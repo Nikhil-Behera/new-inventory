@@ -3,11 +3,13 @@ import './AddProductModal.css';
 
 function AddProductModal({ onClose, onSave, productToEdit }) {
   const isEditMode = Boolean(productToEdit);
+  const godowns = ['Main Godown', 'Secondary Godown']; // Hardcoded for now
 
   // State to manage the form inputs
   const [newProduct, setNewProduct] = useState({
-    productName: '', supplier: '', quantity: '', price: '', expiryDate: '', location: '',
+    productName: '', supplier: '', quantity: '', price: '', expiryDate: '', location: godowns[0],
   });
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (isEditMode) {
@@ -15,9 +17,13 @@ function AddProductModal({ onClose, onSave, productToEdit }) {
       setNewProduct(productToEdit);
     } else {
       // If adding, ensure the form is clear
-      setNewProduct({ productName: '', supplier: '', quantity: '', price: '', expiryDate: '', location: '' });
+      setNewProduct({ productName: '', supplier: '', quantity: '', price: '', expiryDate: '', location: godowns[0] });
     }
   }, [productToEdit, isEditMode]);
+
+  const validateName = (name) => {
+    return /^[a-zA-Z\s]*$/.test(name);
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +32,14 @@ function AddProductModal({ onClose, onSave, productToEdit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validateName(newProduct.productName)) {
+      setError('Product name should only contain alphabetic characters.');
+      return;
+    }
+    if (!validateName(newProduct.supplier)) {
+      setError('Supplier name should only contain alphabetic characters.');
+      return;
+    }
     // Create a new product object with a unique ID and correct data types
     const productData = {
       ...newProduct,
@@ -44,6 +58,7 @@ function AddProductModal({ onClose, onSave, productToEdit }) {
           <h2>{isEditMode ? 'Edit Product' : 'Add New Product'}</h2>
           <button onClick={onClose} className="modal-close-btn">&times;</button>
         </div>
+        {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit} className="modal-form">
           <div className="form-group">
             <label htmlFor="productName">Product Name</label>
@@ -66,8 +81,10 @@ function AddProductModal({ onClose, onSave, productToEdit }) {
             <input type="date" id="expiryDate" name="expiryDate" value={newProduct.expiryDate} onChange={handleChange} required />
           </div>
           <div className="form-group">
-            <label htmlFor="location">Location</label>
-            <input type="text" id="location" name="location" value={newProduct.location} onChange={handleChange} required />
+            <label htmlFor="location">Godown</label>
+            <select id="location" name="location" value={newProduct.location} onChange={handleChange} required>
+              {godowns.map(g => <option key={g} value={g}>{g}</option>)}
+            </select>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
