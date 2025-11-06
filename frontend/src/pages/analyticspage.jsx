@@ -1,13 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import SummaryCard from '../components/summarycard.jsx'; // Make sure this path is correct!
 import "./analyticspage.css"; // We'll create this new CSS file
 
 function AnalyticsPage() {
+  const navigate = useNavigate();
   // Mock data for this page
   const topSellers = [
     { id: 'p2', name: 'biscuit', sold: 3 },
     { id: 'p1', name: 'lays', sold: 1 },
   ];
+
+  const handleCardClick = (path) => {
+    if (path) {
+      navigate(path);
+    }
+  };
 
   return (
     <div className="analytics-page">
@@ -28,16 +36,21 @@ function AnalyticsPage() {
           title="Total Orders" 
           value="1" 
           description="Delivery challans" 
+          // No navigation for this card for now
         />
         <SummaryCard 
           title="Low Stock Items" 
           value="1" 
           description="Below 10 units" 
+          onClick={() => handleCardClick('/inventory')}
+          isClickable={true}
         />
         <SummaryCard 
           title="Expiring Soon" 
           value="1" 
           description="Within 30 days" 
+          onClick={() => handleCardClick('/inventory')}
+          isClickable={true}
         />
       </div>
 
