@@ -12,6 +12,7 @@ function SignupPage() {
   const [contactNo, setContactNo] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const validatePassword = (password) => {
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,16}$/;
@@ -35,8 +36,10 @@ function SignupPage() {
     setGodownNames(newGodownNames);
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    setError('');
+
     if (!validatePassword(password)) {
       setError('Password must be 8-16 characters long and contain at least one special character.');
       return;
@@ -49,9 +52,10 @@ function SignupPage() {
       setError('Name should only contain alphabetic characters.');
       return;
     }
-    // In a real app, you would register the user via an API call.
-    // For now, we'll assume signup is successful and navigate to the login page.
-    console.log({
+
+    setLoading(true);
+
+    const signupData = {
       name,
       email,
       companyName,
@@ -59,8 +63,27 @@ function SignupPage() {
       godownNames,
       contactNo,
       password,
-    });
-    navigate('/login');
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(signupData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ message: 'Signup failed. Please try again.' }));
+        throw new Error(errorData.message);
+      }
+
+      // On successful signup, navigate to the login page
+      navigate('/login');
+    } catch (err) {
+      setError(err.message || 'An unexpected error occurred.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -159,8 +182,8 @@ function SignupPage() {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary auth-btn">
-            Sign Up
+          <button type="submit" className="btn btn-primary auth-btn" disabled={loading}>
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
           
           <p className="auth-footer">
