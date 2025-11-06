@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AddOrderModal.css'; // We'll create this CSS file next
+import { mockCustomers } from '../data/mockcust';
+import { mockProducts } from '../data/mockproducts';
 
 function AddOrderModal({ onClose, onSave, orderToEdit }) {
   const isEditMode = Boolean(orderToEdit);
@@ -8,9 +10,13 @@ function AddOrderModal({ onClose, onSave, orderToEdit }) {
     challanId: '',
     customer: '',
     deliveryDate: '',
-    items: '', // This will be a string for now, e.g., "3 items" or "Laptop, Mouse"
+    items: [], // Changed to an array
     status: 'Pending', // Default status
   });
+  const [suggestions, setSuggestions] = useState([]);
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState('');
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     if (isEditMode) {
@@ -21,7 +27,7 @@ function AddOrderModal({ onClose, onSave, orderToEdit }) {
         challanId: '',
         customer: '',
         deliveryDate: '',
-        items: '',
+        items: [],
         status: 'Pending',
       });
     }
@@ -32,11 +38,60 @@ function AddOrderModal({ onClose, onSave, orderToEdit }) {
     setOrderData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleCustomerChange = (e) => {
+    const { value } = e.target;
+    // Allow only alphabetic characters for customer name
+    if (/^[a-zA-Z\s]*$/.test(value)) {
+      setOrderData(prev => ({ ...prev, customer: value }));
+      if (value) {
+        const filteredSuggestions = mockCustomers.filter(c =>
+          c.name.toLowerCase().includes(value.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions);
+        setIsDropdownVisible(true);
+      } else {
+        setSuggestions([]);
+        setIsDropdownVisible(false);
+      }
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    setOrderData(prev => ({ ...prev, customer: suggestion.name }));
+    setSuggestions([]);
+    setIsDropdownVisible(false);
+  };
+
+  const handleAddItem = () => {
+    const product = mockProducts.find(p => p.id === selectedProduct);
+    if (!product) {
+      alert('Please select a product.');
+      return;
+    }
+
+    if (quantity > product.quantity) {
+      alert(`Insufficient stock for ${product.productName}. Available: ${product.quantity}`);
+      return;
+    }
+
+    const newItem = {
+      productId: product.id,
+      productName: product.productName,
+      quantity,
+      price: product.price,
+    };
+
+    setOrderData(prev => ({ ...prev, items: [...prev.items, newItem] }));
+    setSelectedProduct('');
+    setQuantity(1);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const orderToSave = {
       ...orderData,
-      id: isEditMode ? orderToEdit.id : `o${Date.now()}`, // Generate unique ID for new orders
+      id: isEditMode ? orderToEdit.id : `o${Date.now()}`,
+      items: orderData.items.map(item => `${item.quantity} x ${item.productName}`).join(', '),
     };
     onSave(orderToSave);
     onClose();
@@ -50,29 +105,46 @@ function AddOrderModal({ onClose, onSave, orderToEdit }) {
           <button onClick={onClose} className="modal-close-btn">&times;</button>
         </div>
         <form onSubmit={handleSubmit} className="modal-form">
-          <div className="form-group">
-            <label htmlFor="challanId">Challan ID</label>
-            <input type="text" id="challanId" name="challanId" value={orderData.challanId} onChange={handleChange} required />
-          </div>
+          {/* ... other form groups ... */}
           <div className="form-group">
             <label htmlFor="customer">Customer</label>
-            <input type="text" id="customer" name="customer" value={orderData.customer} onChange={handleChange} required />
+            <input
+              type="text"
+              id="customer"
+              name="customer"
+              value={orderData.customer}
+              onChange={handleCustomerChange}
+              required
+              autoComplete="off"
+            />
+            {isDropdownVisible && suggestions.length > 0 && (
+              <ul className="suggestions-dropdown">
+                {suggestions.map(suggestion => (
+                  <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
+                    {suggestion.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+          {/* ... other form groups ... */}
           <div className="form-group">
-            <label htmlFor="deliveryDate">Delivery Date</label>
-            <input type="date" id="deliveryDate" name="deliveryDate" value={orderData.deliveryDate} onChange={handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="items">Items Description</label>
-            <input type="text" id="items" name="items" value={orderData.items} onChange={handleChange} placeholder="e.g., 3 Lays, 2 Biscuits" required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="status">Status</label>
-            <select id="status" name="status" value={orderData.status} onChange={handleChange} required>
-              <option value="Pending">Pending</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
+            <label>Items</label>
+            <div className="item-adder">
+              <select value={selectedProduct} onChange={(e) => setSelectedProduct(e.target.value)}>
+                <option value="">Select a product</option>
+                {mockProducts.map(p => (
+                  <option key={p.id} value={p.id}>{p.productName}</option>
+                ))}
+              </select>
+              <input type="number" value={quantity} onChange={(e) => setQuantity(parseInt(e.target.value, 10))} min="1" />
+              <button type="button" onClick={handleAddItem}>Add</button>
+            </div>
+            <ul className="added-items">
+              {orderData.items.map((item, index) => (
+                <li key={index}>{item.quantity} x {item.productName} @ ${item.price}</li>
+              ))}
+            </ul>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>

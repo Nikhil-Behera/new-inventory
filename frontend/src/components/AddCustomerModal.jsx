@@ -27,7 +27,20 @@ function AddCustomerModal({ onClose, onSave, customerToEdit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCustomerData(prev => ({ ...prev, [name]: value }));
+
+    if (name === 'name') {
+      // Allow only alphabetic characters for name
+      if (/^[a-zA-Z\s]*$/.test(value)) {
+        setCustomerData(prev => ({ ...prev, [name]: value }));
+      }
+    } else if (name === 'contact') {
+      // Allow only 10-digit numbers for contact
+      if (/^\d{0,10}$/.test(value)) {
+        setCustomerData(prev => ({ ...prev, [name]: value }));
+      }
+    } else {
+      setCustomerData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
