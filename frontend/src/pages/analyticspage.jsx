@@ -36,7 +36,8 @@ function AnalyticsPage() {
           title="Total Orders" 
           value="1" 
           description="Delivery challans" 
-          // No navigation for this card for now
+          onClick={() => handleCardClick('/orders')}
+          isClickable={true}
         />
         <SummaryCard 
           title="Low Stock Items" 
