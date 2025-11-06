@@ -1,20 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './SummaryCard.css';
 
-function SummaryCard({ title, value, description, isAlert = false, to }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (to) {
-      navigate(to);
-    }
-  };
+function SummaryCard({ title, value, description, isAlert = false, onClick, isClickable = false }) {
+  const cardClassName = `summary-card ${isAlert ? 'alert' : ''} ${isClickable ? 'clickable' : ''}`;
 
   return (
     <div 
-      className={`summary-card ${isAlert ? 'alert' : ''} ${to ? 'clickable' : ''}`}
-      onClick={handleClick}
+      className={cardClassName}
+      onClick={onClick}
     >
       <div className="card-header">
         <span className="card-title">{title}</span>
