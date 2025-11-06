@@ -1,3 +1,4 @@
+/* This file is also used by CustomersPage.jsx and OrdersPage.jsx */
 .actions-cell {
   display: flex;
   gap: 0.75rem;

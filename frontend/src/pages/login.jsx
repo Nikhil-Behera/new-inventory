@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './AuthForm.css'; // We'll create this CSS file next
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -26,7 +28,9 @@ function LoginPage() {
               type="email" 
               id="email" 
               placeholder="you@example.com" 
-              defaultValue="1@1" // Pre-filled from your screenshot
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -36,7 +40,9 @@ function LoginPage() {
               type="password" 
               id="password" 
               placeholder="••••••••"
-              defaultValue="123" // Just for testing
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 

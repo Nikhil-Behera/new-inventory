@@ -40,7 +40,7 @@ function InvoicesPage() {
                 <td>{invoice.challanId}</td>
                 <td>{invoice.customer}</td>
                 <td>{invoice.date}</td>
-                <td>${invoice.totalAmount.toFixed(2)}</td>
+                <td>₹{invoice.totalAmount.toFixed(2)}</td>
                 <td>
                   <button>[Download]</button>
                 </td>

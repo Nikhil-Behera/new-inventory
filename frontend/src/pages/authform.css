@@ -54,6 +54,36 @@
   margin-bottom: 0 !important;
 }
 
+.password-strength-meter {
+  height: 8px;
+  width: 100%;
+  background-color: var(--color-light-bg);
+  border-radius: 4px;
+  margin-top: 0.75rem;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  width: 0;
+  background-color: var(--color-danger);
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-bar[data-strength='1'] { background-color: #dc3545; } /* Red */
+.strength-bar[data-strength='2'] { background-color: #ffc107; } /* Orange */
+.strength-bar[data-strength='3'] { background-color: #ffc107; } /* Yellow */
+.strength-bar[data-strength='4'] { background-color: #28a745; } /* Light Green */
+.strength-bar[data-strength='5'] { background-color: #218838; } /* Dark Green */
+
+.form-hint {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 0.5rem;
+  text-align: left !important;
+  margin-bottom: 0 !important;
+}
+
 .auth-btn {
   width: 100%;
   padding: 0.85rem;

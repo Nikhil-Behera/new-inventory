@@ -12,9 +12,8 @@ function SignupPage() {
   const handleSignup = (e) => {
     e.preventDefault();
     // In a real app, you would register the user via an API call.
-    // For now, we'll assume signup is successful and navigate to the 2FA page.
-    // In a real app, the backend would indicate if 2FA is required.
-    navigate('/verify-2fa');
+    // For now, we'll assume signup is successful and navigate to the login page.
+    navigate('/login');
   };
 
   return (
@@ -41,7 +40,23 @@ function SignupPage() {
               id="password" 
               placeholder="••••••••"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            {password.length > 0 && (
+              <div className="password-strength-meter">
+                <div 
+                  className="strength-bar" 
+                  style={{ width: `${strengthScore * 20}%` }}
+                  data-strength={strengthScore}
+                ></div>
+              </div>
+            )}
+            <p className="form-hint">
+              {password.length > 0 
+                ? `Strength: ${strength.feedback.warning || 'Good'}` 
+                : 'Use a mix of letters, numbers, and symbols.'}
+            </p>
           </div>
 
           <button type="submit" className="btn btn-primary auth-btn">

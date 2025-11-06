@@ -75,3 +75,23 @@
 .btn-mark-as-read:hover {
   background-color: #f9f9f9;
 }
+
+.btn-mark-all {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-mark-all:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-mark-all:disabled {
+  background-color: var(--color-border);
+  cursor: not-allowed;
+}
