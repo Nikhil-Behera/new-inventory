@@ -31,6 +31,12 @@ function CustomersPage() {
     setCustomerToEdit(null);
   };
 
+  const handleDeleteCustomer = (customerId) => {
+    if (window.confirm('Are you sure you want to delete this customer?')) {
+      setCustomers(customers.filter(c => c.id !== customerId));
+    }
+  };
+
   const handleDownloadCustomer = (customer) => {
     const doc = new jsPDF();
 
@@ -87,7 +93,7 @@ function CustomersPage() {
                 <button className="icon-btn" title="Download Details" onClick={() => handleDownloadCustomer(customer)}>
                   <FaDownload />
                 </button>
-                <button className="icon-btn delete">
+                <button className="icon-btn delete" onClick={() => handleDeleteCustomer(customer.id)}>
                   <FaTrash />
                 </button>
               </td>
